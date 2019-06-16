@@ -2,4 +2,21 @@
   <simplebar>
     In your local clone of your forked repository, you can add the original GitHub repository as a "remote". ("Remotes" are like nicknames for the URLs of repositories - origin is one, for example.) Then you can fetch all the branches from that upstream repository, and rebase your work to continue working on the upstream version. In terms of commands that might look lik
   </simplebar>
+  <div class="dynamic-elements-demo">
+    <h3>Example dynamic elements</h3>
+    <input type="text" placeholder="Add todo" #txt (keyup)="keyHandler($event)">
+    <button class="btn"(click)="addTodo(txt)">Add</button>
+    <div style="height:250px;width:250px">
+        <simplebar [options]="scrollBarOption">
+          <div *ngFor="let todo of todoList; let idx= index" >
+            <span class="todo-item" (click)="toggleTodo(todo)" [ngClass]="{'done': todo.done}">   
+              {{todo.title}}
+            </span>
+            <button (click)="removeTodo(idx)">
+              x
+            </button>
+          </div>
+        </simplebar>
+    </div>
+  </div>
 </div>

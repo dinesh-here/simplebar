@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, Input } from '@angular/core';
 import SimpleBar from 'simplebar';
 
 @Component({
@@ -7,13 +7,19 @@ import SimpleBar from 'simplebar';
   styleUrls: ['./simplebar.component.scss']
 })
 export class SimplebarComponent implements OnInit, AfterViewInit {
+  @Input() options: IScrollbarOptions;
   SimpleBar: any;
   constructor(private eleRef: ElementRef) { }
 
   ngOnInit() {
   }
   ngAfterViewInit() {
-    this.SimpleBar = new SimpleBar(this.eleRef.nativeElement.firstChild)
+    this.SimpleBar = new SimpleBar(this.eleRef.nativeElement.firstChild, this.options ? this.options : {});
   }
 
+}
+
+export interface IScrollbarOptions {
+  autoHide?: boolean;
+  scrollbarMinSize?: number;
 }
